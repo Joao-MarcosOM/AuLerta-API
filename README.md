@@ -42,7 +42,7 @@ Contribuições são bem-vindas! Se você encontrou problemas, tem sugestões de
 
 ## Contato 📬
 
-Se tiver alguma pergunta ou desejar entrar em contato, você pode me encontrar no [LinkedIn](www.linkedin.com/in/joão-marcosom).
+Se tiver alguma pergunta ou desejar entrar em contato, você pode me encontrar no [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-marcosom/).
 
 ---
 
