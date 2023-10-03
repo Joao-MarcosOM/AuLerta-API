@@ -27,8 +27,8 @@ O AuLerta é um projeto acadêmico. A aplicação simula uma agenda para seu pet
 ## Como Executar Localmente ▶️
 
 1. Certifique-se de ter o Node.js e um banco de dados SQL instalados.
-2. Clone este repositório: `git clone https://github.com/Joao-MarcosOM/backend.git`
-3. Navegue para o diretório do projeto: `cd backend`
+2. Clone este repositório: `git clone https://github.com/Joao-MarcosOM/AuLerta-API.git`
+3. Navegue para o diretório do projeto: `cd AuLerta-API`
 4. Instale as dependências: `npm install`
 5. Configure as variáveis de ambiente em um arquivo `.env`.
 6. Execute as migrações do banco de dados: `npx knex migrate:latest`
