@@ -1,4 +1,5 @@
-# FoodExplorer Backend 🍽️
+# AuLerta Backend ![ScaredDogGIF](https://github.com/Joao-MarcosOM/AuLerta-API/assets/70643779/0138117f-1898-4e92-bbef-e45b4a730974)
+
 
 Bem-vindo ao repositório do backend da aplicação FoodExplorer! Este é o local onde desenvolvemos e mantemos a lógica e as funcionalidades que sustentam a aplicação FoodExplorer.
 
