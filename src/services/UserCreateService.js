@@ -10,7 +10,7 @@ class UserCreateService{
         //Isso significa que o this é o contexto global da classe e to pegando o parametro que eu recebo e deixando ele disponível na classe toda
     }
 
-    async execute({name, email, password}){
+    async execute({name, email, password, ct_emergency}){
         const checkUserExists = await this.userRepository.findByEmail(email);
         
         if(checkUserExists){
@@ -20,7 +20,7 @@ class UserCreateService{
         const hashedPassword = await hash(password, 8);
         //Primeiro passamos o que queremos criptografar e depois o grau de complexidade
 
-        const userCreated = await this.userRepository.create({name,email, password: hashedPassword})
+        const userCreated = await this.userRepository.create({name,email, password: hashedPassword, ct_emergency})
 
         return userCreated;
 

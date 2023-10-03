@@ -3,6 +3,7 @@ exports.up = knex => knex.schema.createTable("users", table => {
     table.text("name").notNullable();
     table.text("email").notNullable();
     table.text("password").notNullable();
+    table.text("ct_emergency").defaultTo("0000-0000");
     table.text("avatar"); // Campo para armazenar a URL da imagem
   
     //Aqui eu estou utilizando o enum e criando uma restrição de quais opções essa coluna vai ter

@@ -12,26 +12,19 @@ const UserRepository = require("../repositories/UserRepository");
 const UserCreateService = require("../services/UserCreateService");
 
 class UserController{
-    /*
-    - index - GET para listar vários registros.
-    - show - GET para exibir um registro específico
-    - create - POST para criar um registro.
-    - update - PUT para atualizar um registro
-    - delete - DELETE para remover um registro
-    */
 
     async create(request, response){
-        const {name, email, password} = request.body
+        const {name, email, password, ct_emergency} = request.body
 
         const userRepository = new UserRepository();
         const userCreateService = new UserCreateService(userRepository);
-        await userCreateService.execute({name, email, password});
+        await userCreateService.execute({name, email, password, ct_emergency});
 
         return response.status(201).json();
     }
 
     async update(request, response){
-        const {name, email, password, old_password} = request.body;
+        const {name, email,ct_emergency, password, old_password} = request.body;
 
         const user_id = request.user.id;
 
@@ -51,6 +44,7 @@ class UserController{
 
         user.name = name ?? user.name;
         user.email = email ?? user.email;
+        user.ct_emergency = ct_emergency ?? user.ct_emergency;
 
         if(password && !old_password){
             throw new AppError("Você precisa informar a senha antiga para informar a nova senha")
@@ -72,8 +66,9 @@ class UserController{
             name = ?,
             email = ?,
             password = ?,
+            ct_emergency = ?,
             updated_at = DATETIME('now')
-            WHERE id = ?`, [user.name, user.email, user.password, user_id]);
+            WHERE id = ?`, [user.name, user.email, user.password,user.ct_emergency, user_id]);
 
         return response.status(200).json();
 
