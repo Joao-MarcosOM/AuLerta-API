@@ -6,7 +6,7 @@ Bem-vindo ao repositório do backend da aplicação AuLerta! Este é o local ond
 
 ## Sobre o Projeto
 
-O AuLerta é um projeto acadêmico. A aplicação simula uma agenda para seu pet, oferecendo uma ampla gama de funcionalidades que vão desde a das informações mais importantes do seu melhor amigo até a notificação da hora que ele precisa tomar um remédio.
+O AuLerta é um projeto acadêmico. A aplicação simula uma agenda para seu pet, oferecendo uma ampla gama de funcionalidades que vão desde salvar as informações mais importantes do seu melhor amigo até a notificação da hora que ele precisa tomar um remédio.
 
 ![DogSmileDogGIF](https://github.com/Joao-MarcosOM/AuLerta-API/assets/70643779/b0ded122-53b2-49d6-88a9-682c571d3733)
 ## Tecnologias Utilizadas 🚀
