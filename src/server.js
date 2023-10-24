@@ -4,6 +4,9 @@ require("dotenv/config");
 require("express-async-errors")
 //Aqui importamos a biblioteca para tratar os erros
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocs = require("./swagger.json");
+
 const migrationsRun = require("./database/sqlite/migrations");
 
 const AppError = require("./utils/AppError");
@@ -53,9 +56,10 @@ app.use((error , request, response, next) => {
     });
 });
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 const PORT = process.env.PORT || 3333;
 //Porta onde o express ficará observando os pedidos
-
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
 //Aqui eu estou informando que a aplicação deve ficar monitorando a porta que eu escolhi

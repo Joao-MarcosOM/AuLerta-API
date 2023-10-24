@@ -1,0 +1,620 @@
+{
+   "openapi": "3.0.0",
+   "info":{
+        "title": "Aulerta API",
+        "description": "O AuLerta é um projeto acadêmico. A aplicação simula uma agenda para seu pet, oferecendo uma ampla gama de funcionalidades que vão desde salvar as informações mais importantes do seu melhor amigo até a notificação da hora que ele precisa tomar um remédio.",
+        "contact":{
+            "email":"joaomarcosbigsan@sempreceub.com"
+        },
+        "version":"1.0.0"
+   },
+   "servers":[
+        {
+            "url": "http://localhost:3333",
+            "description": "API de teste"
+        },
+        {
+            "url": "http://localhost:3333",
+            "description": "API de produção"
+        }
+    ],
+    "paths":{
+        "/session":{
+            "post":{
+                "summary": "Criação de sessão",
+                "description": "Essa rota será responsável para criar a sessão do usuário para que ele consiga realizar as outras requisições",
+                "tags":["Session"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/Session"
+                            },
+                            "examples":{
+                                "session":{
+                                    "value":{
+                                        "email":"joaomarcos@email.com",
+                                        "password":"joao12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description": "E-mail e/ou senha incorreta"
+                        },
+                    "201":{
+                        "description": "Sessão Criada",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Session"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users":{
+            "post":{
+                "summary": "Criação de usuário",
+                "description": "Essa rota será responsável por cadastrar um novo usuário",
+                "tags":["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/User"
+                            },
+                            "examples":{
+                                "user":{
+                                    "value":{
+                                        "name":"João Marcos",
+                                        "email":"joaomarcos@email.com",
+                                        "password":"joao12345",
+                                        "ct_emergency":"1111-1111"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description": "Este e-mail já está em uso."
+                        },
+                    "201":{
+                        "description": "Contato criado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Atualização de usuário",
+                "description": "Essa rota será responsável por atualizar um usuário",
+                "tags":["Users"],
+                "security":[{"bearerAuth": []}],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/User"
+                            },
+                            "examples":{
+                                "user":{
+                                    "value":{
+                                        "name":"João Marcos",
+                                        "email":"joaomarcos@email.com",
+                                        "password":"joao123",
+                                        "old_password":"joao12345",
+                                        "ct_emergency":"1111-1111"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description": "Usuário não encontrado"
+                        },
+                    "201":{
+                        "description": "Contato atualizado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pets":{
+            "get":{
+                "summary": "Busca de pet",
+                "description": "Retorna os pets do usuário",
+                "tags":["Pets"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "name":"name",
+                        "in":"query",
+                        "description":"name do pet",
+                        "required": false
+                    },
+                    {
+                        "tags":"tags",
+                        "in":"query",
+                        "description":"tags do pet",
+                        "required": false
+                    }
+                ],
+
+                "responses":{
+                    "201":{
+                        "description": "Pets retornados com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/components/schemas/Pet"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pets/{id}":{
+            "post":{
+                "summary": "Criação de pet",
+                "description": "Criação do pet do usuário",
+                "tags":["Pets"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/Pet"
+                            },
+                            "examples":{
+                                "pet":{
+                                    "value":{
+                                        "name": "Babi", 
+                                        "age": "5", 
+                                        "weight": "3.6",  
+                                        "race": "shitzu", 
+                                        "specie": "cachorro", 
+                                        "sex": "male",
+                                        "tags": ["peludo", "fofo"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description": "Pet criado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Pet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Atualização de pet",
+                "description": "Atualização do pet do usuário",
+                "tags":["Pets"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/Pet"
+                            },
+                            "examples":{
+                                "pet":{
+                                    "value":{
+                                        "name": "Babi", 
+                                        "age": "5", 
+                                        "weight": "3.6",  
+                                        "race": "shitzu", 
+                                        "specie": "cachorro", 
+                                        "sex": "male",
+                                        "tags": ["peludo", "fofo"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description": "Pet não encontrado"
+                    },
+                    "201":{
+                        "description": "Pet atualizado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Pet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "summary": "Retorna informações de um único pet",
+                "description": "Retorna informações do pet do usuário",
+                "tags":["Pets"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Pet não encontrado"
+                    },
+                    "201":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Pet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Exclusão de pet",
+                "description": "Exclui os dados do pet do usuário",
+                "tags":["Pets"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description": "Pet excluído com sucesso"
+                    }
+                }
+            }
+        },
+        "/pets/image/{pet_id}":{
+            "patch":{
+                "summary":"Atualiza a imagem do pet",
+                "description":"Atualização da imagem do pet","operationId":"uploadFile",
+                "consumes":["multipart/form-data"],
+                "produces":["application/json"],
+                "tags":["Pets"],
+                "parameters":[
+                    {"name":"pet_id","in":"path","description":"ID of pet to update","required":true,"type":"integer","format":"int64"},
+                    {"name":"file","in":"formData","description":"file to upload","required":false,"type":"file"}
+                ],
+                "responses":{
+                    "401":{
+                        "description":"Esse pet não existe."
+                    },
+                    "201":{
+                        "description": "Imagem atualizada com sucesso"
+                    }
+                }
+            }
+        },
+        "/medicines/{id}":{
+            "post":{
+                "summary": "Criação de remédio",
+                "description": "Criação do remédio do pet",
+                "tags":["Medicine"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/Medicine"
+                            },
+                            "examples":{
+                                "medicine":{
+                                    "value":{
+                                        "name": "Remédio X", 
+                                        "dose": "15 ml", 
+                                        "frequency": "8 horas",  
+                                        "type": "remedio"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description": "Remédio criado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Medicine"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Atualização de remédio",
+                "description": "Atualização do remédio do usuário",
+                "tags":["Medicine"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/Medicine"
+                            },
+                            "examples":{
+                                "medicine":{
+                                    "value":{
+                                        "name": "Remédio X", 
+                                        "dose": "15 ml", 
+                                        "frequency": "8 horas",  
+                                        "type": "remedio"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description": "Remédio não encontrado"
+                    },
+                    "201":{
+                        "description": "Remédio atualizado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Medicine"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "summary": "Retorna informações de um único remédio",
+                "description": "Retorna informações do remédio do usuário",
+                "tags":["Medicine"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "remédio não encontrado"
+                    },
+                    "201":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Medicine"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Exclusão de remédio",
+                "description": "Exclui os dados do remédio do pet",
+                "tags":["Medicine"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "id":"id",
+                        "in":"path",
+                        "description":"Id do pet",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description": "Remédio excluído com sucesso"
+                    }
+                }
+            }
+        },
+        "/tags":{
+            "get":{
+                "summary": "Busca de tags",
+                "description": "Retorna todas as tags atreladas aquela usuário ordenada por ordem alfabética e não repetidas",
+                "tags":["Tags"],
+                "security":[{"bearerAuth": []}],
+                "responses":{
+                    "201":{
+                        "description": "Tags retornadas com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "items":{
+                                        "$ref":"#/components/schemas/Tags"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "User":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "email":{
+                        "type": "string"
+                    },
+                    "password":{
+                        "type":"string"
+                    },
+                    "ct_emergency":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Session":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                        "type": "string"
+                    },
+                    "password":{
+                        "type":"string"
+                    } 
+                }
+            },
+            "Pet":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    }, 
+                    "age":{
+                        "type":"string"
+                    }, 
+                    "weight":{
+                        "type":"string"
+                    }, 
+                    "race":{
+                        "type":"string"
+                    }, 
+                    "specie":{
+                        "type":"string"
+                    }, 
+                    "sex":{
+                        "type":"string"
+                    }, 
+                    "tags":{
+                        "type":"array"
+                    }
+                }
+            },
+            "Medicine":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    }, 
+                    "dose":{
+                        "type":"string"
+                    }, 
+                    "frequency":{
+                        "type":"string"
+                    }, 
+                    "type":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Tags":{
+                "type":"object",
+                "properties":{
+                    "tags":{
+                        "type":"array"
+                    }
+                }
+            }
+        },
+        "securitySchemes":{
+            "bearerAuth":{
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+        }
+    }
+   
+}
+
+
