@@ -10,12 +10,12 @@
    },
    "servers":[
         {
-            "url": "http://localhost:3333",
-            "description": "API de teste"
+            "url": "https://aulerta-api.onrender.com",
+            "description": "API de produção"
         },
         {
             "url": "http://localhost:3333",
-            "description": "API de produção"
+            "description": "API de teste"
         }
     ],
     "paths":{
