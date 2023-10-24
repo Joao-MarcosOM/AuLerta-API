@@ -1,11 +1,14 @@
-# FoodExplorer Backend 🍽️
 
-Bem-vindo ao repositório do backend da aplicação FoodExplorer! Este é o local onde desenvolvemos e mantemos a lógica e as funcionalidades que sustentam a aplicação FoodExplorer.
+# AuLerta Backend 🐶
+
+Bem-vindo ao repositório do backend da aplicação AuLerta! Este é o local onde desenvolvemos e mantemos a lógica e as funcionalidades que sustentam a aplicação AuLerta.
+![CatSmileGIF](https://github.com/Joao-MarcosOM/AuLerta-API/assets/70643779/f5598037-89f3-4e22-b008-20fc540ab84f)
 
 ## Sobre o Projeto
 
-O FoodExplorer é um projeto pessoal desenvolvido para estudos próprios em colaboração com a Rocketseat. A aplicação simula um restaurante, oferecendo uma ampla gama de funcionalidades que vão desde a visualização de um prato até o pagamento do mesmo.
+O AuLerta é um projeto acadêmico. A aplicação simula uma agenda para seu pet, oferecendo uma ampla gama de funcionalidades que vão desde salvar as informações mais importantes do seu melhor amigo até a notificação da hora que ele precisa tomar um remédio.
 
+![DogSmileDogGIF](https://github.com/Joao-MarcosOM/AuLerta-API/assets/70643779/b0ded122-53b2-49d6-88a9-682c571d3733)
 ## Tecnologias Utilizadas 🚀
 
 - Node.js: Plataforma JavaScript para construção de aplicações server-side.
@@ -17,33 +20,24 @@ O FoodExplorer é um projeto pessoal desenvolvido para estudos próprios em cola
 ## Funcionalidades Principais 🛠️
 
 - Gerenciamento de usuários e autenticação.
-- Controle de Personas (admin e uusário)
-- CRUD (Create, Read, Update, Delete) de produtos.
-- Relacionamento entre produtos e ingredientes.
+- Controle de Personas (admin e usário)
+- CRUD (Create, Read, Update, Delete) de pets.
+- Relacionamento entre pets e remédios.
 
 ## Como Executar Localmente ▶️
 
 1. Certifique-se de ter o Node.js e um banco de dados SQL instalados.
-2. Clone este repositório: `git clone https://github.com/Joao-MarcosOM/backend.git`
-3. Navegue para o diretório do projeto: `cd backend`
+2. Clone este repositório: `git clone https://github.com/Joao-MarcosOM/AuLerta-API.git`
+3. Navegue para o diretório do projeto: `cd AuLerta-API`
 4. Instale as dependências: `npm install`
 5. Configure as variáveis de ambiente em um arquivo `.env`.
 6. Execute as migrações do banco de dados: `npx knex migrate:latest`
-7. Inicie o servidor: `npm start`
+7. Inicie o servidor: `npm run dev`
 
 ## Contribuição 🤝
 
 Contribuições são bem-vindas! Se você encontrou problemas, tem sugestões de melhorias ou deseja adicionar novas funcionalidades, fique à vontade para abrir uma Issue ou enviar um Pull Request.
 
-## Links 🔗
-
-- [Repositório do Frontend](https://github.com/Joao-MarcosOM/FoodExplorer)
-- [Aplicação Online](https://rocketfoodexplorer.netlify.app/)
-
 ## Contato 📬
 
 Se tiver alguma pergunta ou desejar entrar em contato, você pode me encontrar no [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-marcosom/).
-
----
-
-Agradecemos por conferir o projeto FoodExplorer Backend! Esperamos que esta aplicação seja útil e inspire seus próprios projetos. Se gostou, não deixe de dar uma ⭐️ no repositório! 👍
