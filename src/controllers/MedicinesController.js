@@ -20,10 +20,10 @@ class MedicinesController{
     async show( request, response){
         const { id } = request.params;
 
-        const medicines = await knex("medicines").groupBy("name");
+        const medicines = await knex("medicines");
 
         return response.json({
-            ...medicines
+            medicines
         });
     }
 

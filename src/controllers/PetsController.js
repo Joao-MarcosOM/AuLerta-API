@@ -31,8 +31,8 @@ class PetsController{
     async show( request, response){
         const { id } = request.params;
 
-        const pet = await knex("pets").where({id}).first();//Aqui ele vai trazer o primeiro registro de nota que ele encontrar
-        const tags = await knex("tags").where({pet_id: id}).orderBy("title"); //Aqui ele vai trazer todas as tags atreladas aquela nota ordenada por ordem alfabética
+        const pet = await knex("pets").where({id}).first();
+        const tags = await knex("tags").where({pet_id: id}).orderBy("title");
 
 
         return response.json({
