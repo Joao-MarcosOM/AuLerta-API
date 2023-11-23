@@ -2,6 +2,8 @@ const knex = require("../database/knex");
 
 class MedicinesController{
     async create(request, response){
+        const userId = request.user.id;
+
         const {name , dose, frequency,  type} = request.body;
         const { id } = request.params;
 
@@ -10,7 +12,8 @@ class MedicinesController{
             dose, 
             frequency,  
             type,
-            pet_id: id
+            pet_id: id,
+            user_id: userId
         });
 
 
@@ -18,9 +21,11 @@ class MedicinesController{
     }
 
     async show( request, response){
+        const user_id = request.user.id;
+
         const { id } = request.params;
 
-        const medicines = await knex("medicines");
+        const medicines = await knex("medicines").where({user_id: user_id});
 
         return response.json({
             medicines
@@ -31,7 +36,7 @@ class MedicinesController{
         const {name , dose, frequency,  type} = request.body;
         const { id } = request.params;
         
-        const medicine = await knex("medicines").where({ pet_id: id }).first();
+        const medicine = await knex("medicines").where({ pet_id: id }).where({user_id: user_id}).first();
         if(!medicine){
             throw new AppError("Medicamento não encontrado")
         }

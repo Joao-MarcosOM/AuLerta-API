@@ -8,6 +8,8 @@ exports.up = knex => knex.schema.createTable("medicines", table => {
     table.enum("type", ["vacina","pílula","cápsula", "xarope"], {useNative: true, enumName: "roles"}).notNullable().defaultTo("Pílula");
 
     table.integer("pet_id").references("id").inTable("pets").onDelete("CASCADE"); 
+    table.integer("user_id").references("id").inTable("users").onDelete("CASCADE"); 
+
 });
 
 //Down é o processo de deletar a tabela
